@@ -347,6 +347,8 @@ AC_LANG_CPLUSPLUS
 AC_SEARCH_LIBS(sem_init,pthread rt)
 #AC_CHECK_LIB(pthread,sem_init)
 
+AC_CHECK_LIB(socket,send,[], AC_MSG_ERROR([socket library missing]))
+
 # ----------------------------------------
 # Checks for header files.
 # ----------------------------------------
@@ -447,9 +449,9 @@ AC_CONFIG_FILES(textord/Makefile)
 AC_CONFIG_FILES(viewer/Makefile)
 AC_CONFIG_FILES(wordrec/Makefile)
 AC_CONFIG_FILES(training/Makefile)
-AC_CONFIG_FILES(tessdata/Makefile)
-AC_CONFIG_FILES(tessdata/configs/Makefile)
-AC_CONFIG_FILES(tessdata/tessconfigs/Makefile)
+#AC_CONFIG_FILES(tessdata/Makefile)
+#AC_CONFIG_FILES(tessdata/configs/Makefile)
+#AC_CONFIG_FILES(tessdata/tessconfigs/Makefile)
 AC_CONFIG_FILES(testing/Makefile)
 AC_CONFIG_FILES(java/Makefile)
 AC_CONFIG_FILES(java/com/Makefile)

@@ -1,6 +1,6 @@
 ## run autogen.sh to create Makefile.in from this file
 ACLOCAL_AMFLAGS = -I m4
-SUBDIRS = ccutil viewer cutil image ccstruct dict classify wordrec neural_networks/runtime textord cube ccmain api . training java doc tessdata testing   
+SUBDIRS = ccutil viewer cutil image ccstruct dict classify wordrec neural_networks/runtime textord cube ccmain api . training java doc testing   
 
 #if USING_GETTEXT
 #SUBDIRS += po

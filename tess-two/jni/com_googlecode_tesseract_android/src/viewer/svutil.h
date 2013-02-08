@@ -39,6 +39,7 @@
 #else
 #include <pthread.h>
 #include <semaphore.h>
+#include <sys/time.h>
 #endif
 
 #include <string>
