@@ -223,7 +223,7 @@ AC_PROG_LIBTOOL
 # TODO(luc) Resolve this issue.
 #AM_INIT_AUTOMAKE(dist-zip)
 AM_INIT_AUTOMAKE
-AM_CONFIG_HEADER(config_auto.h:config/config.h.in)
+AC_CONFIG_HEADERS(config_auto.h:config/config.h.in)
 #AM_PROG_CC_C_O
 AM_MAINTAINER_MODE
 # Need to tell automake if Visual C++ is being used:
