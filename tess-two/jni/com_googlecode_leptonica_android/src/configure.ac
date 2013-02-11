@@ -1,7 +1,7 @@
 AC_PREREQ([2.50])
 AC_INIT([leptonica], [1.69], [dan.bloomberg@gmail.com])
 AC_CONFIG_AUX_DIR([config])
-AM_CONFIG_HEADER([config_auto.h:config/config.h.in])
+AC_CONFIG_HEADERS([config_auto.h:config/config.h.in])
 AC_CONFIG_SRCDIR([src/adaptmap.c])
 
 AC_CONFIG_MACRO_DIR([m4])
