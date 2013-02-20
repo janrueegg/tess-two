@@ -89,7 +89,7 @@ int CachedFile::Read(void *read_buff, int bytes) {
     int copy_bytes = buff_size_ - buff_pos_;
 
     if (copy_bytes > 0) {
-      memcpy(buff, buff_ + buff_pos_, copy_bytes);
+      std::memcpy(buff, buff_ + buff_pos_, copy_bytes);
       buff += copy_bytes;
       bytes -= copy_bytes;
       read_bytes += copy_bytes;
@@ -116,7 +116,7 @@ int CachedFile::Read(void *read_buff, int bytes) {
     file_pos_ += buff_size_;
   }
 
-  memcpy(buff, buff_ + buff_pos_, bytes);
+  std::memcpy(buff, buff_ + buff_pos_, bytes);
   read_bytes += bytes;
   buff_pos_ += bytes;
 

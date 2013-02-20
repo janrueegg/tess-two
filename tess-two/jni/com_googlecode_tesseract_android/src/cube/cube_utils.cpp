@@ -372,15 +372,15 @@ bool CubeUtils::IsCaseInvariant(const char_32 *str32, CharSet *char_set) {
   if (!char_set) {
     // If cube char_set is missing, use C-locale-dependent functions
     // on UTF8 characters to determine case properties.
-    first_upper = isupper(str32[0]);
-    first_lower = islower(str32[0]);
+    first_upper = std::isupper(str32[0]);
+    first_lower = std::islower(str32[0]);
     if (first_upper)
       capitalized = true;
     prev_upper = first_upper;
-    prev_lower = islower(str32[0]);
+    prev_lower = std::islower(str32[0]);
     for (int c = 1; str32[c] != 0; ++c) {
-      cur_upper = isupper(str32[c]);
-      cur_lower = islower(str32[c]);
+      cur_upper = std::isupper(str32[c]);
+      cur_lower = std::islower(str32[c]);
       if ((prev_upper && cur_lower) || (prev_lower && cur_upper))
         all_one_case = false;
       if (cur_upper)

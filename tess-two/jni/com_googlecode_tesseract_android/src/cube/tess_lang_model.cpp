@@ -359,10 +359,10 @@ int TessLangModel::FanOut(CharAltList *alt_list, const Dawg *dawg,
 
         if (has_case_ == true) {
           const char_32 *edge_str = child_edge->EdgeString();
-          if (edge_str != NULL && islower(edge_str[0]) != 0 &&
+          if (edge_str != NULL && std::islower(edge_str[0]) != 0 &&
               edge_str[1] == 0) {
             int class_id =
-                cntxt_->CharacterSet()->ClassID(toupper(edge_str[0]));
+                cntxt_->CharacterSet()->ClassID(std::toupper(edge_str[0]));
             if (class_id != INVALID_UNICHAR_ID) {
               // generate an upper case edge for lower case chars
               edge_array[edge_cnt] = new TessLangModEdge(cntxt_, dawg,

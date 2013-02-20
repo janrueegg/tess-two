@@ -93,7 +93,7 @@ unsigned char **Bmp8::CreateBmpBuffer(unsigned char init_val) {
     return NULL;
   }
 
-  memset(buff[0], init_val, stride_ * hgt_ * sizeof(*buff[0]));
+  std::memset(buff[0], init_val, stride_ * hgt_ * sizeof(*buff[0]));
 
   for (int y = 1; y < hgt_; y++) {
     buff[y] = buff[y -1] + stride_;
@@ -120,7 +120,7 @@ unsigned int ** Bmp8::CreateBmpBuffer(int wid, int hgt,
     return NULL;
   }
 
-  memset(buff[0], init_val, wid * hgt * sizeof(*buff[0]));
+  std::memset(buff[0], init_val, wid * hgt * sizeof(*buff[0]));
 
   for (int y = 1; y < hgt; y++) {
     buff[y] = buff[y -1] + wid;
@@ -135,7 +135,7 @@ bool Bmp8::Clear() {
     return false;
   }
 
-  memset(line_buff_[0], 0xff, stride_ * hgt_ * sizeof(*line_buff_[0]));
+  std::memset(line_buff_[0], 0xff, stride_ * hgt_ * sizeof(*line_buff_[0]));
   return true;
 }
 
@@ -512,7 +512,7 @@ bool Bmp8::LoadFromRawData(unsigned char *data) {
 
   // copy the data
   for (int y = 0; y < hgt_; y++, pline_data += wid_) {
-    memcpy(line_buff_[y], pline_data, wid_ * sizeof(*pline_data));
+    std::memcpy(line_buff_[y], pline_data, wid_ * sizeof(*pline_data));
   }
 
   return true;
@@ -599,7 +599,7 @@ bool Bmp8::IsIdentical(Bmp8 *pBmp) const {
   }
 
   for (int y = 0; y < hgt_; y++) {
-    if (memcmp(line_buff_[y], pBmp->line_buff_[y], wid_) != 0) {
+    if (std::memcmp(line_buff_[y], pBmp->line_buff_[y], wid_) != 0) {
       return false;
     }
   }
@@ -730,8 +730,8 @@ ConComp ** Bmp8::FindConComps(int *concomp_cnt, int min_size) const {
             }
 
             if (alloc_concomp_cnt > 0) {
-              memcpy(temp_con_comp, concomp_array,
-                     alloc_concomp_cnt * sizeof(*concomp_array));
+              std::memcpy(temp_con_comp, concomp_array,
+                          alloc_concomp_cnt * sizeof(*concomp_array));
 
               delete []concomp_array;
             }
@@ -835,7 +835,7 @@ bool Bmp8::Deslant() {
       delete[] angle_hist;
       return false;
     }
-    memset(angle_hist[ang_idx], 0, des_wid * sizeof(*angle_hist[ang_idx]));
+    std::memset(angle_hist[ang_idx], 0, des_wid * sizeof(*angle_hist[ang_idx]));
   }
 
   // compute histograms
@@ -924,7 +924,7 @@ bool Bmp8::LoadFromCharDumpFile(unsigned char **raw_data_ptr) {
   unsigned int val32;
 
   // read and check 32 bit marker
-  memcpy(&val32, raw_data, sizeof(val32));
+  std::memcpy(&val32, raw_data, sizeof(val32));
   raw_data += sizeof(val32);
 
   if (val32 != kMagicNumber) {
@@ -932,14 +932,14 @@ bool Bmp8::LoadFromCharDumpFile(unsigned char **raw_data_ptr) {
   }
 
   // read wid and hgt
-  memcpy(&wid, raw_data, sizeof(wid));
+  std::memcpy(&wid, raw_data, sizeof(wid));
   raw_data += sizeof(wid);
 
-  memcpy(&hgt, raw_data, sizeof(hgt));
+  std::memcpy(&hgt, raw_data, sizeof(hgt));
   raw_data += sizeof(hgt);
 
   // read buf size
-  memcpy(&buf_size, raw_data, sizeof(buf_size));
+  std::memcpy(&buf_size, raw_data, sizeof(buf_size));
   raw_data += sizeof(buf_size);
 
   // validate buf size: for now, only 3 channel (RBG) is supported
@@ -1020,7 +1020,7 @@ bool Bmp8::HorizontalDeslant(double *deslant_angle) {
       delete[] angle_hist;
       return false;
     }
-    memset(angle_hist[ang_idx], 0, des_hgt * sizeof(*angle_hist[ang_idx]));
+    std::memset(angle_hist[ang_idx], 0, des_hgt * sizeof(*angle_hist[ang_idx]));
   }
 
   // compute histograms

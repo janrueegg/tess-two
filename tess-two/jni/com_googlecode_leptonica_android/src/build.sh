@@ -8,14 +8,20 @@ CPU="$1$2"
 if [ "$2" == "v7le" ]; then
   CPUDIR="$1le-v7"
   BUSUFFIX="$1v7"
+  ENDIANSUFFIX="le"
+  QCCFLAGS="-fstack-protector-strong -mcpu=cortex-a9 -mfloat-abi=softfp -mfpu=neon"
 elif [ "$2" == "a9" ]; then
   CPUDIR="$1le-v7"
   CPU="$1v7le"
   BUSUFFIX="$1v7"
+  ENDIANSUFFIX="le"
   CPUGEN="a9"
+  QCCFLAGS="-fstack-protector-strong -mcpu=cortex-a9 -mfloat-abi=softfp -mfpu=neon"
 else
   CPUDIR="$CPU"
   BUSUFFIX="$1"
+  ENDIANSUFFIX=""
+  QCCFLAGS="-fstack-protector-strong"
 fi
 
 #########################################
@@ -31,15 +37,16 @@ COMP_PATHS=" \
     -L$TARGET_USR_LIB \
     -I$TARGET_INC"
 
+export QPPFLAGS="-Y_cpp"
 export OPTFLAGS="-O3 -DNDEBUG"
-export CFLAGS="-fpic $COMP_PATHS $MAKEFLAGS $OPTFLAGS"
-export CXXFLAGS="-fpic $COMP_PATHS $MAKEFLAGS $OPTFLAGS"
-export CPPFLAGS="-fpic $COMP_PATHS $MAKEFLAGS $OPTFLAGS"
+export CFLAGS="-fpic $QCCFLAGS $COMP_PATHS $MAKEFLAGS $OPTFLAGS"
+export CXXFLAGS="-fpic $QCCFLAGS $COMP_PATHS $MAKEFLAGS $OPTFLAGS"
+export CPPFLAGS="-fpic $QCCFLAGS $COMP_PATHS $MAKEFLAGS $OPTFLAGS"
 
-export CPP="$QNX_HOST/usr/bin/nto$BUSUFFIX-cpp-4.6.3"
-export CXX="$QNX_HOST/usr/bin/nto$BUSUFFIX-g++-4.6.3"
-export CXXCPP="$QNX_HOST/usr/bin/nto$BUSUFFIX-cpp-4.6.3"
-export CC="$QNX_HOST/usr/bin/nto$BUSUFFIX-gcc-4.6.3"
+export CPP="$QNX_HOST/usr/bin/qcc -V gcc_nto$BUSUFFIX$ENDIANSUFFIX -P"
+export CXX="$QNX_HOST/usr/bin/qcc -V gcc_nto$BUSUFFIX$ENDIANSUFFIX -lang-c++ $QPPFLAGS"
+export CXXCPP="$QNX_HOST/usr/bin/qcc -V gcc_nto$BUSUFFIX$ENDIANSUFFIX -lang-c++ -P $QPPFLAGS"
+export CC="$QNX_HOST/usr/bin/qcc -V gcc_nto$BUSUFFIX$ENDIANSUFFIX -lang-c"
 export LD="$QNX_HOST/usr/bin/nto$BUSUFFIX-ld"
 export AR="$QNX_HOST/usr/bin/nto$BUSUFFIX-ar"
 export AS="$QNX_HOST/usr/bin/nto$BUSUFFIX-as"
