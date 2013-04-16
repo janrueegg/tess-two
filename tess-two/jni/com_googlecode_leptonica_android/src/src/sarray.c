@@ -1864,7 +1864,7 @@ struct stat s;
     return safiles;
 }
 
-#else  /* _WIN32 */
+#elif defined(_WIN32) && !defined(WINAPI_FAMILY)
 
     /* http://msdn2.microsoft.com/en-us/library/aa365200(VS.85).aspx */
 #include <windows.h>

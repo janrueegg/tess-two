@@ -2136,6 +2136,8 @@ lept_free(void *ptr)
 }
 
 
+#ifndef WINAPI_FAMILY
+
 /*--------------------------------------------------------------------*
  *                Cross-platform file system operations               *
  *         [ These only write to /tmp or its subdirectories ]         *
@@ -2521,6 +2523,8 @@ l_uint32  attributes;
     return ret;
 }
 
+#endif // WINAPI_FAMILY
+
 
 /*--------------------------------------------------------------------*
  *                         File name operations                       *
@@ -2746,6 +2750,8 @@ L_BYTEA  *ba;
 }
 
 
+#ifndef WINAPI_FAMILY
+
 /*!
  *  genPathname()
  *
@@ -2950,6 +2956,8 @@ l_int32  ret;
     return stringJoin(buf, tail);
 }
 
+#endif // WINAPI_FAMILY
+
 
 /*!
  *  extractNumberFromFilename()
@@ -3091,7 +3099,7 @@ getLeptonicaVersion()
   #elif _M_X64
     char bitStr[] = " 64 bit";
   #else
-    char bitStr[] = ""
+    char bitStr[] = "";
   #endif
     snprintf(version, 100, "leptonica-%d.%d (%s, %s) [MSC v.%d %s %s%s]",
              LIBLEPT_MAJOR_VERSION, LIBLEPT_MINOR_VERSION,
@@ -3206,7 +3214,7 @@ struct timeval tv;
 }
 
 
-#else   /* _WIN32 : resource.h not implemented under Windows */
+#elif defined(_WIN32) && !defined(WINAPI_FAMILY)   /* _WIN32 : resource.h not implemented under Windows */
 
     /* Note: if division by 10^7 seems strange, the time is expressed
      * as the number of 100-nanosecond intervals that have elapsed
