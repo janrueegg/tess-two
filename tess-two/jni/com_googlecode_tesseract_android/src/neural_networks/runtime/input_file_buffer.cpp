@@ -10,7 +10,7 @@
 
 namespace tesseract {
 // default and only contsructor
-InputFileBuffer::InputFileBuffer(const string &file_name)
+InputFileBuffer::InputFileBuffer(const std::string &file_name)
   : file_name_(file_name) {
   fp_ = NULL;
 }

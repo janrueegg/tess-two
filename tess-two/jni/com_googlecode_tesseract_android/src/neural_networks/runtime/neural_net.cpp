@@ -190,7 +190,7 @@ float * NeuralNet::AllocWgt(int wgt_cnt) {
   // see if need to allocate a new chunk of wts
   if (wts_vec_.size() == 0 || (alloc_wgt_cnt_ + wgt_cnt) > kWgtChunkSize) {
     // add the new chunck to the wts_chunks vector
-    wts_vec_.push_back(new vector<float> (kWgtChunkSize));
+    wts_vec_.push_back(new std::vector<float> (kWgtChunkSize));
     alloc_wgt_cnt_ = 0;
   }
   float *ret_ptr = &((*wts_vec_.back())[alloc_wgt_cnt_]);
@@ -201,7 +201,7 @@ float * NeuralNet::AllocWgt(int wgt_cnt) {
 }
 
 // create a new net object using an input file as a source
-NeuralNet *NeuralNet::FromFile(const string file_name) {
+NeuralNet *NeuralNet::FromFile(const std::string file_name) {
   // open the file
   InputFileBuffer   input_buff(file_name);
   // create a new net object using input buffer
@@ -277,7 +277,7 @@ template <typename Type> bool NeuralNet::GetNetOutput(const Type *inputs,
 
   // For the slow version, we'll just call FeedForward and return the
   // appropriate output
-  vector<Type> outputs(out_cnt_);
+  std::vector<Type> outputs(out_cnt_);
   if (!FeedForward(inputs, &outputs[0])) {
     return false;
   }
