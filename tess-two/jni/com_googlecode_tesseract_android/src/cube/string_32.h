@@ -28,17 +28,17 @@
 #include <algorithm>
 #include <vector>
 
-#ifdef USE_STD_NAMESPACE
-using std::basic_string;
-using std::string;
-using std::vector;
-#endif
+//#ifdef USE_STD_NAMESPACE
+//using std::basic_string;
+//using std::string;
+//using std::vector;
+//#endif
 
 namespace tesseract {
 
 // basic definitions
 typedef signed int char_32;
-typedef basic_string<char_32> string_32;
+typedef std::basic_string<char_32> string_32;
 }
 
 #endif  // STRING_32_H

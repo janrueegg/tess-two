@@ -15,4 +15,4 @@ set(NON_INST_HEADERS ambigs.h bits16.h bitvector.h ccutil.h clst.h elst2.h
 					 unicodes.h)
 
 add_definitions(-DWINDLLNAME=\"tesseract\")
-add_library(tesseract_ccutil STATIC ${SOURCES} ${HEADERS} ${NON_INST_HEADERS})
+add_library(ccutil STATIC ${SOURCES} ${HEADERS} ${NON_INST_HEADERS})

@@ -46,10 +46,10 @@ CharBigrams::~CharBigrams() {
   }
 }
 
-CharBigrams *CharBigrams::Create(const string &data_file_path,
-                                 const string &lang) {
-  string file_name;
-  string str;
+CharBigrams *CharBigrams::Create(const std::string &data_file_path,
+                                 const std::string &lang) {
+  std::string file_name;
+  std::string str;
 
   file_name = data_file_path + lang;
   file_name += ".cube.bigrams";
@@ -73,7 +73,7 @@ CharBigrams *CharBigrams::Create(const string &data_file_path,
   table->char_bigram = NULL;
 
   // split into lines
-  vector<string> str_vec;
+  std::vector<std::string> str_vec;
   CubeUtils::SplitStringUsing(str, "\r\n", &str_vec);
 
   for (int big = 0; big < str_vec.size(); big++) {

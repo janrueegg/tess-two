@@ -5,4 +5,4 @@ set(HEADERS )
 
 set(NO_INST_HEADERS scrollview.h svmnode.h svutil.h)
 
-add_library(cutil STATIC ${SOURCES} ${HEADERS} ${NO_INST_HEADERS})
+add_library(viewer STATIC ${SOURCES} ${HEADERS} ${NO_INST_HEADERS})

@@ -19,7 +19,8 @@ set(CMAKE_BUILD_TYPE Release)
 #add_definitions(-DHAVE_CONFIG_H)
 
 # Leptonica (assuming the default install directory for now)
-include_directories(${CMAKE_SOURCE_DIR}/../../com_googlecode_leptonica_android/src/build/install/include/leptonica)
+set(LEPTONICA_ROOT ${CMAKE_SOURCE_DIR}/../../com_googlecode_leptonica_android/src/build/install)
+include_directories(${LEPTONICA_ROOT}/include/leptonica)
 
 add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 
@@ -34,6 +35,6 @@ add_subdirectory(wordrec)
 add_subdirectory(neural_networks/runtime)
 add_subdirectory(textord)
 add_subdirectory(cube)
-#add_subdirectory(ccmain)
-#add_subdirectory(api)
+add_subdirectory(ccmain)
+add_subdirectory(api)
 # . training java doc testing)

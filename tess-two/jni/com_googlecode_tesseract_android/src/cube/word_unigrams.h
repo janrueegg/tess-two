@@ -37,8 +37,8 @@ class WordUnigrams {
   ~WordUnigrams();
   // Load the word-list and unigrams from file and create an object
   // The word list is assumed to be sorted
-  static WordUnigrams *Create(const string &data_file_path,
-                              const string &lang);
+  static WordUnigrams *Create(const std::string &data_file_path,
+                              const std::string &lang);
   // Compute the unigram cost of a UTF-32 string. Splits into
   // space-separated tokens, strips trailing punctuation from each
   // token, evaluates case properties, and calls internal Cost()

@@ -51,11 +51,11 @@ CharSamp *FeatureChebyshev::ComputeFeatureBitmap(CharSamp *char_samp) {
 }
 
 // Compute Chebyshev coefficients for the specified vector
-void FeatureChebyshev::ChebyshevCoefficients(const vector<float> &input,
+void FeatureChebyshev::ChebyshevCoefficients(const std::vector<float> &input,
                                              int coeff_cnt, float *coeff) {
   // re-sample function
   int input_range = (input.size() - 1);
-  vector<float> resamp(coeff_cnt);
+  std::vector<float> resamp(coeff_cnt);
   for (int samp_idx = 0; samp_idx < coeff_cnt; samp_idx++) {
     // compute sampling position
     float samp_pos = input_range *
@@ -96,8 +96,8 @@ bool FeatureChebyshev::ComputeChebyshevCoefficients(CharSamp *char_samp,
   int word_hgt = (255 * (char_samp->Top() + char_samp->Height()) /
                   char_samp->NormBottom());
   // compute left & right profiles
-  vector<float> left_profile(word_hgt, 0.0);
-  vector<float> right_profile(word_hgt, 0.0);
+  std::vector<float> left_profile(word_hgt, 0.0);
+  std::vector<float> right_profile(word_hgt, 0.0);
   unsigned char *line_data = raw_data;
   for (int y = 0; y < char_samp->Height(); y++, line_data += stride) {
     int min_x = char_samp->Width();
@@ -116,8 +116,8 @@ bool FeatureChebyshev::ComputeChebyshevCoefficients(CharSamp *char_samp,
   }
 
   // compute top and bottom profiles
-  vector<float> top_profile(char_samp->Width(), 0);
-  vector<float> bottom_profile(char_samp->Width(), 0);
+  std::vector<float> top_profile(char_samp->Width(), 0);
+  std::vector<float> bottom_profile(char_samp->Width(), 0);
   for (int x = 0; x < char_samp->Width(); x++) {
     int min_y = word_hgt;
     int max_y = -1;

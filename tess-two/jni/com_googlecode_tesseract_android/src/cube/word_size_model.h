@@ -46,7 +46,7 @@ struct PairSizeInfo {
 };
 
 struct FontPairSizeInfo {
-  string font_name;
+  std::string font_name;
   PairSizeInfo **pair_size_info;
 };
 
@@ -54,8 +54,8 @@ class WordSizeModel {
  public:
   WordSizeModel(CharSet *, bool contextual);
   virtual ~WordSizeModel();
-  static WordSizeModel *Create(const string &data_file_path,
-                               const string &lang,
+  static WordSizeModel *Create(const std::string &data_file_path,
+                               const std::string &lang,
                                CharSet *char_set,
                                bool contextual);
   // Given a word and number of unichars, return the size cost,
@@ -67,7 +67,7 @@ class WordSizeModel {
   static double PairCost(int width_0, int height_0, int top_0,
                          int width_1, int height_1, int top_1,
                          const PairSizeInfo& pair_info);
-  bool Save(string file_name);
+  bool Save(std::string file_name);
   // Number of fonts in size model.
   inline int FontCount() const {
     return font_pair_size_models_.size();
@@ -91,10 +91,10 @@ class WordSizeModel {
   bool contextual_;
   CharSet *char_set_;
   // Size ratios table
-  vector<FontPairSizeInfo> font_pair_size_models_;
+  std::vector<FontPairSizeInfo> font_pair_size_models_;
 
   // Initialize the word size model object
-  bool Init(const string &data_file_path, const string &lang);
+  bool Init(const std::string &data_file_path, const std::string &lang);
 };
 }
 #endif  // WORD_SIZE_MODEL_H

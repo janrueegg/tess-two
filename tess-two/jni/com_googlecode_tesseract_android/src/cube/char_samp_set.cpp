@@ -90,7 +90,7 @@ bool CharSampSet::LoadCharSamples(FILE *fp) {
 }
 
 // creates a CharSampSet object from file
-CharSampSet * CharSampSet::FromCharDumpFile(string file_name) {
+CharSampSet * CharSampSet::FromCharDumpFile(std::string file_name) {
   FILE *fp;
   unsigned int val32;
   // open the file
@@ -119,7 +119,7 @@ CharSampSet * CharSampSet::FromCharDumpFile(string file_name) {
 }
 
 // Create a new Char Dump file
-FILE *CharSampSet::CreateCharDumpFile(string file_name) {
+FILE *CharSampSet::CreateCharDumpFile(std::string file_name) {
   FILE *fp;
   unsigned int val32;
   // create the file
@@ -137,7 +137,7 @@ FILE *CharSampSet::CreateCharDumpFile(string file_name) {
 
 // Enumerate the Samples in the set one-by-one calling the enumertor's
   // EnumCharSamp method for each sample
-bool CharSampSet::EnumSamples(string file_name, CharSampEnum *enum_obj) {
+bool CharSampSet::EnumSamples(std::string file_name, CharSampEnum *enum_obj) {
   CachedFile *fp_in;
   unsigned int val32;
   long i64_size,

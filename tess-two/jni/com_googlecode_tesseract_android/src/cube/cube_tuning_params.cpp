@@ -51,8 +51,8 @@ CubeTuningParams::~CubeTuningParams() {
 
 // Create an Object given the data file path and the language by loading
 // the approporiate file
-CubeTuningParams *CubeTuningParams::Create(const string &data_file_path,
-                                           const string &lang) {
+CubeTuningParams *CubeTuningParams::Create(const std::string &data_file_path,
+                                           const std::string &lang) {
   CubeTuningParams *obj = new CubeTuningParams();
   if (!obj) {
     fprintf(stderr, "Cube ERROR (CubeTuningParams::Create): unable to "
@@ -60,7 +60,7 @@ CubeTuningParams *CubeTuningParams::Create(const string &data_file_path,
     return NULL;
   }
 
-  string tuning_params_file;
+  std::string tuning_params_file;
   tuning_params_file = data_file_path + lang;
   tuning_params_file += ".cube.params";
 
@@ -75,9 +75,9 @@ CubeTuningParams *CubeTuningParams::Create(const string &data_file_path,
 }
 
 // Loads the params file
-bool CubeTuningParams::Load(string tuning_params_file) {
+bool CubeTuningParams::Load(std::string tuning_params_file) {
   // load the string into memory
-  string param_str;
+  std::string param_str;
 
   if (CubeUtils::ReadFileToString(tuning_params_file, &param_str) == false) {
     fprintf(stderr, "Cube ERROR (CubeTuningParams::Load): unable to read "
@@ -86,7 +86,7 @@ bool CubeTuningParams::Load(string tuning_params_file) {
   }
 
   // split into lines
-  vector<string> str_vec;
+  std::vector<std::string> str_vec;
   CubeUtils::SplitStringUsing(param_str, "\r\n", &str_vec);
   if (str_vec.size() < 8) {
     fprintf(stderr, "Cube ERROR (CubeTuningParams::Load): number of rows "
@@ -97,7 +97,7 @@ bool CubeTuningParams::Load(string tuning_params_file) {
   // for all entries
   for (int entry = 0; entry < str_vec.size(); entry++) {
     // tokenize
-    vector<string> str_tok;
+    std::vector<std::string> str_tok;
 
     // should be only two tokens
     CubeUtils::SplitStringUsing(str_vec[entry], "=", &str_tok);
@@ -186,7 +186,7 @@ bool CubeTuningParams::Load(string tuning_params_file) {
 }
 
 // Save the parameters to a file
-bool CubeTuningParams::Save(string file_name) {
+bool CubeTuningParams::Save(std::string file_name) {
   FILE *params_file = fopen(file_name.c_str(), "wb");
   if (params_file == NULL) {
     fprintf(stderr, "Cube ERROR (CubeTuningParams::Save): error opening file "

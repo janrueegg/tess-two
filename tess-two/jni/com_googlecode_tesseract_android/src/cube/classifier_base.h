@@ -71,7 +71,7 @@ class CharClassifier {
   virtual int CharCost(CharSamp *char_samp) = 0;
   virtual bool Train(CharSamp *char_samp, int ClassID) = 0;
   virtual bool SetLearnParam(char *var_name, float val) = 0;
-  virtual bool Init(const string &data_file_path, const string &lang,
+  virtual bool Init(const std::string &data_file_path, const std::string &lang,
                     LangModel *lang_mod) = 0;
 
   // accessors
@@ -83,8 +83,8 @@ class CharClassifier {
 
  protected:
   virtual void Fold() = 0;
-  virtual bool LoadFoldingSets(const string &data_file_path,
-                               const string &lang,
+  virtual bool LoadFoldingSets(const std::string &data_file_path,
+                               const std::string &lang,
                                LangModel *lang_mod) = 0;
   FeatureBase *feat_extract_;
   CharSet *char_set_;

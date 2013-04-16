@@ -91,7 +91,7 @@ CubeRecoContext::~CubeRecoContext() {
 
 // Returns the path of the data files by looking up the TESSDATA_PREFIX
 // environment variable and appending a "tessdata" directory to it
-bool CubeRecoContext::GetDataFilePath(string *path) const {
+bool CubeRecoContext::GetDataFilePath(std::string *path) const {
   *path = tess_obj_->datadir.string();
   return true;
 }
@@ -110,7 +110,7 @@ bool CubeRecoContext::Load(TessdataManager *tessdata_manager,
                            UNICHARSET *tess_unicharset) {
   ASSERT_HOST(tess_obj_ != NULL);
   tess_unicharset_ = tess_unicharset;
-  string data_file_path;
+  std::string data_file_path;
 
   // Get the data file path.
   if (GetDataFilePath(&data_file_path) == false) {
@@ -129,8 +129,8 @@ bool CubeRecoContext::Load(TessdataManager *tessdata_manager,
     return false;
   }
   // Create the language model.
-  string lm_file_name = data_file_path + lang_ + ".cube.lm";
-  string lm_params;
+  std::string lm_file_name = data_file_path + lang_ + ".cube.lm";
+  std::string lm_params;
   if (!CubeUtils::ReadFileToString(lm_file_name, &lm_params)) {
     fprintf(stderr, "Cube ERROR (CubeRecoContext::Load): unable to read cube "
             "language model params from %s\n", lm_file_name.c_str());

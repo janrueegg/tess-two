@@ -156,7 +156,7 @@ bool HybridNeuralNetCharClassifier::RunNets(CharSamp *char_samp) {
   float *inputs = net_input_;
   for (int net_idx = 0; net_idx < nets_.size(); net_idx++) {
     // run each net
-    vector<float> net_out(class_cnt, 0.0);
+    std::vector<float> net_out(class_cnt, 0.0);
     if (!nets_[net_idx]->FeedForward(inputs, &net_out[0])) {
       return false;
     }
@@ -216,9 +216,9 @@ void HybridNeuralNetCharClassifier::SetNet(tesseract::NeuralNet *char_net) {
 // This function returns true on success or if the file can't be read,
 // returns false if an error is encountered.
 bool HybridNeuralNetCharClassifier::LoadFoldingSets(
-    const string &data_file_path, const string &lang, LangModel *lang_mod) {
+    const std::string &data_file_path, const std::string &lang, LangModel *lang_mod) {
   fold_set_cnt_ = 0;
-  string fold_file_name;
+  std::string fold_file_name;
   fold_file_name = data_file_path + lang;
   fold_file_name += ".cube.fold";
 
@@ -229,14 +229,14 @@ bool HybridNeuralNetCharClassifier::LoadFoldingSets(
   }
   fclose(fp);
 
-  string fold_sets_str;
+  std::string fold_sets_str;
   if (!CubeUtils::ReadFileToString(fold_file_name.c_str(),
                                   &fold_sets_str)) {
     return false;
   }
 
   // split into lines
-  vector<string> str_vec;
+  std::vector<std::string> str_vec;
   CubeUtils::SplitStringUsing(fold_sets_str, "\r\n", &str_vec);
   fold_set_cnt_ = str_vec.size();
   fold_sets_ = new int *[fold_set_cnt_];
@@ -280,8 +280,8 @@ bool HybridNeuralNetCharClassifier::LoadFoldingSets(
 }
 
 // Init the classifier provided a data-path and a language string
-bool HybridNeuralNetCharClassifier::Init(const string &data_file_path,
-                                         const string &lang,
+bool HybridNeuralNetCharClassifier::Init(const std::string &data_file_path,
+                                         const std::string &lang,
                                          LangModel *lang_mod) {
   if (init_ == true) {
     return true;
@@ -306,10 +306,10 @@ bool HybridNeuralNetCharClassifier::Init(const string &data_file_path,
 // Load the classifier's Neural Nets
 // This function will return true if the net file does not exist.
 // But will fail if the net did not pass the sanity checks
-bool HybridNeuralNetCharClassifier::LoadNets(const string &data_file_path,
-                                             const string &lang) {
-  string hybrid_net_file;
-  string junk_net_file;
+bool HybridNeuralNetCharClassifier::LoadNets(const std::string &data_file_path,
+                                             const std::string &lang) {
+  std::string hybrid_net_file;
+  std::string junk_net_file;
 
   // add the lang identifier
   hybrid_net_file = data_file_path + lang;
@@ -322,13 +322,13 @@ bool HybridNeuralNetCharClassifier::LoadNets(const string &data_file_path,
   }
   fclose(fp);
 
-  string str;
+  std::string str;
   if (!CubeUtils::ReadFileToString(hybrid_net_file.c_str(), &str)) {
     return false;
   }
 
   // split into lines
-  vector<string> str_vec;
+  std::vector<std::string> str_vec;
   CubeUtils::SplitStringUsing(str, "\r\n", &str_vec);
   if (str_vec.size() <= 0) {
     return false;
@@ -340,14 +340,14 @@ bool HybridNeuralNetCharClassifier::LoadNets(const string &data_file_path,
   int total_input_size = 0;
   for (int net_idx = 0; net_idx < str_vec.size(); net_idx++) {
     // parse the string
-    vector<string> tokens_vec;
+    std::vector<std::string> tokens_vec;
     CubeUtils::SplitStringUsing(str_vec[net_idx], " \t", &tokens_vec);
     // has to be 2 tokens, net name and input size
     if (tokens_vec.size() != 2) {
       return false;
     }
     // load the net
-    string net_file_name = data_file_path + tokens_vec[0];
+    std::string net_file_name = data_file_path + tokens_vec[0];
     nets_[net_idx] = tesseract::NeuralNet::FromFile(net_file_name.c_str());
     if (nets_[net_idx] == NULL) {
       return false;

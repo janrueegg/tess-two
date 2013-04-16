@@ -218,11 +218,11 @@ void ConvNetCharClassifier::SetNet(tesseract::NeuralNet *char_net) {
 
 // This function will return true if the file does not exist.
 // But will fail if the it did not pass the sanity checks
-bool ConvNetCharClassifier::LoadFoldingSets(const string &data_file_path,
-                                            const string &lang,
+bool ConvNetCharClassifier::LoadFoldingSets(const std::string &data_file_path,
+                                            const std::string &lang,
                                             LangModel *lang_mod) {
   fold_set_cnt_ = 0;
-  string fold_file_name;
+  std::string fold_file_name;
   fold_file_name = data_file_path + lang;
   fold_file_name += ".cube.fold";
 
@@ -233,14 +233,14 @@ bool ConvNetCharClassifier::LoadFoldingSets(const string &data_file_path,
   }
   fclose(fp);
 
-  string fold_sets_str;
+  std::string fold_sets_str;
   if (!CubeUtils::ReadFileToString(fold_file_name.c_str(),
                                   &fold_sets_str)) {
     return false;
   }
 
   // split into lines
-  vector<string> str_vec;
+  std::vector<std::string> str_vec;
   CubeUtils::SplitStringUsing(fold_sets_str, "\r\n", &str_vec);
   fold_set_cnt_ = str_vec.size();
 
@@ -285,8 +285,8 @@ bool ConvNetCharClassifier::LoadFoldingSets(const string &data_file_path,
 }
 
 // Init the classifier provided a data-path and a language string
-bool ConvNetCharClassifier::Init(const string &data_file_path,
-                                 const string &lang,
+bool ConvNetCharClassifier::Init(const std::string &data_file_path,
+                                 const std::string &lang,
                                  LangModel *lang_mod) {
   if (init_) {
     return true;
@@ -311,9 +311,9 @@ bool ConvNetCharClassifier::Init(const string &data_file_path,
 // Load the classifier's Neural Nets
 // This function will return true if the net file does not exist.
 // But will fail if the net did not pass the sanity checks
-bool ConvNetCharClassifier::LoadNets(const string &data_file_path,
-                                     const string &lang) {
-  string char_net_file;
+bool ConvNetCharClassifier::LoadNets(const std::string &data_file_path,
+                                     const std::string &lang) {
+  std::string char_net_file;
 
   // add the lang identifier
   char_net_file = data_file_path + lang;

@@ -65,7 +65,7 @@ class WordListLangModel : public LangModel {
   // more than one spelling in terms of the class-ids.
   static void WordVariants(const CharSet &char_set, const UNICHARSET *uchset,
                            string_32 str32,
-                           vector<WERD_CHOICE *> *word_variants);
+                           std::vector<WERD_CHOICE *> *word_variants);
  private:
   // constants needed to configure the language model
   static const int kMaxEdge = 512;
@@ -83,7 +83,7 @@ class WordListLangModel : public LangModel {
       const CharSet &char_set,
       string_32 prefix_str32, WERD_CHOICE *word_so_far,
       string_32 str32,
-      vector<WERD_CHOICE *> *word_variants);
+      std::vector<WERD_CHOICE *> *word_variants);
 };
 }  // tesseract
 
