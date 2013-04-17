@@ -106,11 +106,15 @@ pause_continue (const char *format, ...
   #endif
 
   #ifdef _WIN32
+  #ifdef WINAPI_FAMILY
+  return true;
+  #else
   str +=
     STRING (msg) + STRING ("\nUse OK to continue, CANCEL to stop pausing");
   //   return AfxMessageBox( str.string(), MB_OKCANCEL ) == IDOK;
   return::MessageBox (NULL, msg, "IMGAPP",
     MB_APPLMODAL | MB_OKCANCEL) == IDOK;
+  #endif
   #endif
 
   #endif

@@ -21,7 +21,15 @@
 #define VS2008_PORT_GETTIMEOFDAY_H_
 
 #ifdef _WIN32
-#include          <winsock.h>    // timeval is defined in here.
+#  ifdef WINAPI_FAMILY
+	typedef struct timeval
+	{
+		long tv_sec;
+		long tv_usec;
+	} timeval;
+#  else
+#    include          <winsock.h>    // timeval is defined in here.
+#  endif
 #endif
 
 typedef struct  timezone tz; 

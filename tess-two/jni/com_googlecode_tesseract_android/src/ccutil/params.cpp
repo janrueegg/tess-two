@@ -71,6 +71,9 @@ bool ParamUtils::ReadParamsFile(const char *file,
 bool ParamUtils::ReadParamsFromFp(FILE *fp, inT64 end_offset,
                                   SetParamConstraint constraint,
                                   ParamsVectors *member_params) {
+#ifdef WINAPI_FAMILY
+  static const int MAX_PATH = 4096;
+#endif
   char line[MAX_PATH];           // input line
   bool anyerr = false;           // true if any error
   bool foundit;                  // found parameter

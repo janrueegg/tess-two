@@ -28,6 +28,9 @@
 
 #ifdef _WIN32
 #include <windows.h>
+#  ifdef WINAPI_FAMILY
+#  include <mutex>
+#  endif
 #else
 #include <pthread.h>
 #include <semaphore.h>
@@ -44,7 +47,11 @@ class CCUtilMutex {
   void Unlock();
  private:
 #ifdef _WIN32
+#  ifdef WINAPI_FAMILY
+  std::mutex mutex_;
+#  else
   HANDLE mutex_;
+#  endif
 #else
   pthread_mutex_t mutex_;
 #endif
