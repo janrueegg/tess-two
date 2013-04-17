@@ -879,9 +879,6 @@ bool TessBaseAPI::ProcessPages(const char* filename,
         return false;
       }
       tprintf(_("Reading %s as a list of filenames...\n"), filename);
-#ifdef WINAPI_FAMILY
-	  static const int MAX_PATH = 4096;
-#endif // WINAPI_FAMILY
       char pagename[MAX_PATH];
       // Skip to the requested page number.
       for (int i = 0; i < page &&
