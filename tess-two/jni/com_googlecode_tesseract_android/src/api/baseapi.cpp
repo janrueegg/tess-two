@@ -297,9 +297,6 @@ void TessBaseAPI::GetAvailableLanguagesAsVector(
   langs->clear();
   if (tesseract_ != NULL) {
 #ifdef _WIN32
-#  ifdef WINAPI_FAMILY
-	langs->push_back(STRING("This function is not supported on Windows Phone 8"));
-#  else
     STRING pattern = tesseract_->datadir + "/*." + kTrainedDataSuffix;
     char fname[_MAX_FNAME];
     WIN32_FIND_DATA data;
@@ -312,7 +309,6 @@ void TessBaseAPI::GetAvailableLanguagesAsVector(
       }
       FindClose(handle);
     }
-#  endif
 #else
     DIR *dir;
     struct dirent *dirent;
@@ -879,9 +875,6 @@ bool TessBaseAPI::ProcessPages(const char* filename,
         return false;
       }
       tprintf(_("Reading %s as a list of filenames...\n"), filename);
-#ifdef WINAPI_FAMILY
-	  static const int MAX_PATH = 4096;
-#endif // WINAPI_FAMILY
       char pagename[MAX_PATH];
       // Skip to the requested page number.
       for (int i = 0; i < page &&

@@ -26,10 +26,6 @@
 
 #ifdef _WIN32
 #ifndef __GNUC__
-#  ifdef WINAPI_FAMILY
-#    include "fake_semaphore.h"
-#    include <mutex>
-#  endif // WINAPI_FAMILY
 #include <windows.h>
 #define snprintf _snprintf
 #if (_MSC_VER <= 1400)
@@ -79,11 +75,7 @@ class SVSemaphore {
   void Wait();
  private:
 #ifdef _WIN32
-#  ifdef WINAPI_FAMILY
-  fake_semaphore semaphore_;
-#  else
   HANDLE semaphore_;
-#  endif
 #else
   sem_t semaphore_;
 #endif
@@ -101,11 +93,7 @@ class SVMutex {
   void Unlock();
  private:
 #ifdef _WIN32
-#  ifdef WINAPI_FAMILY
-  std::mutex mutex_;
-#  else
   HANDLE mutex_;
-#  endif
 #else
   pthread_mutex_t mutex_;
 #endif

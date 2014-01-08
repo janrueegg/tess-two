@@ -26,9 +26,7 @@ CCUtil::~CCUtil() {
 
 CCUtilMutex::CCUtilMutex() {
 #ifdef _WIN32
-#  ifndef WINAPI_FAMILY
   mutex_ = CreateMutex(0, FALSE, 0);
-#  endif
 #else
   pthread_mutex_init(&mutex_, NULL);
 #endif
@@ -36,11 +34,7 @@ CCUtilMutex::CCUtilMutex() {
 
 void CCUtilMutex::Lock() {
 #ifdef _WIN32
-#  ifdef WINAPI_FAMILY
-  mutex_.lock();
-#  else
   WaitForSingleObject(mutex_, INFINITE);
-#  endif
 #else
   pthread_mutex_lock(&mutex_);
 #endif
@@ -48,11 +42,7 @@ void CCUtilMutex::Lock() {
 
 void CCUtilMutex::Unlock() {
 #ifdef _WIN32
-#  ifdef WINAPI_FAMILY
-  mutex_.unlock();
-#  else
   ReleaseMutex(mutex_);
-#  endif
 #else
   pthread_mutex_unlock(&mutex_);
 #endif

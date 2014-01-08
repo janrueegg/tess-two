@@ -20,8 +20,6 @@
 #include <allheaders.h>
 #include "gettimeofday.h"
 
-#ifdef WINAPI_FAMILY
-#else
 int gettimeofday(struct timeval *tp, struct timezone *tzp) {
   l_int32 sec, usec;
   if (tp == NULL)
@@ -32,4 +30,3 @@ int gettimeofday(struct timeval *tp, struct timezone *tzp) {
   tp->tv_usec = usec;
   return 0;
 }
-#endif

@@ -48,9 +48,6 @@ void CCUtil::main_setup(                 /*main demo program */
                ) {
   imagebasename = basename;      /*name of image */
 
-#ifdef WINAPI_FAMILY
-  datadir = "./";
-#else
   // TESSDATA_PREFIX Environment variable overrules everything.
   // Compiled in -DTESSDATA_PREFIX is next.
   // An actual value of argv0 is used if not NULL, otherwise current directory.
@@ -79,7 +76,6 @@ void CCUtil::main_setup(                 /*main demo program */
   } else {
     datadir = getenv("TESSDATA_PREFIX");
   }
-#endif // WINAPI_FAMILY
 
   // check for missing directory separator
   const char *lastchar = datadir.string();

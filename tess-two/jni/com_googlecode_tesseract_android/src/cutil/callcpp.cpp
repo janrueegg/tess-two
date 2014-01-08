@@ -26,8 +26,8 @@
 #include          "errcode.h"
 #ifdef __UNIX__
 #include          <assert.h>
-#endif
 #include <stdarg.h>
+#endif
 #include          <time.h>
 #include          "memry.h"
 #include          "scrollview.h"

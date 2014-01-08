@@ -214,7 +214,7 @@ void EquationDetect::IdentifySpecialText(
   BlobSpecialTextType type = BSTT_NONE;
 
   // Classification.
-  if (std::max(lang_score, equ_score) < kConfScoreTh) {
+  if (fmax(lang_score, equ_score) < kConfScoreTh) {
     // If both score are very small, then mark it as unclear.
     type = BSTT_UNCLEAR;
   } else if (diff > kConfDiffTh && equ_score > lang_score) {

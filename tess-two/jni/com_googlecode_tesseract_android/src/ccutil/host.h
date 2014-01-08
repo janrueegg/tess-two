@@ -42,8 +42,8 @@
  ** limitations under the License.
  */
 
-#ifndef   __FOO_HOST__
-#define   __FOO_HOST__
+#ifndef   __HOST__
+#define   __HOST__
 
 /******************************************************************************
  **                                IMPORTANT!!!                                                                                                                 **
@@ -63,10 +63,7 @@
 /* _WIN32 */
 #ifdef _WIN32
 #include <windows.h>
-#include <cstdint>
-#ifndef WINAPI_FAMILY
-#  include <winbase.h>             // winbase.h contains windows.h
-#endif // WINAPI_FAMILY
+#include <winbase.h>             // winbase.h contains windows.h
 #endif
 
 /********************************************************/
@@ -105,8 +102,8 @@ typedef unsigned short uinT16;
 typedef int inT32;
 typedef unsigned int uinT32;
 #if (_MSC_VER >= 1200)            //%%% vkr for VC 6.0
-typedef int64_t inT64;
-typedef uint64_t uinT64;
+typedef INT64 inT64;
+typedef UINT64 uinT64;
 #else
 typedef long long int inT64;
 typedef unsigned long long int uinT64;
@@ -153,4 +150,4 @@ template<class T> bool NearlyEqual(T x, T y, T tolerance) {
   return diff <= tolerance && -diff <= tolerance;
 }
 
-#endif // __FOO_HOST__
+#endif
