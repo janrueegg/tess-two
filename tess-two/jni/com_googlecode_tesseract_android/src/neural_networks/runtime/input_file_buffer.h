@@ -11,19 +11,19 @@
 
 #include <stdio.h>
 #include <string>
-//#ifdef USE_STD_NAMESPACE
-//using std::string;
-//#endif
+#ifdef USE_STD_NAMESPACE
+using std::string;
+#endif
 
 namespace tesseract {
 class InputFileBuffer {
   public:
-    explicit InputFileBuffer(const std::string &file_name);
+    explicit InputFileBuffer(const string &file_name);
     virtual ~InputFileBuffer();
     int Read(void *buffer, int bytes_to_read);
 
   protected:
-    std::string file_name_;
+    string file_name_;
     FILE *fp_;
 };
 }

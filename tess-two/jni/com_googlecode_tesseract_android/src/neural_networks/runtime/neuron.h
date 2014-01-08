@@ -12,9 +12,9 @@
 #include <math.h>
 #include <vector>
 
-//#ifdef USE_STD_NAMESPACE
-//using std::vector;
-//#endif
+#ifdef USE_STD_NAMESPACE
+using std::vector;
+#endif
 
 namespace tesseract {
 
@@ -130,9 +130,9 @@ class Neuron {
     // node output
     float output_;
     // pointers to fanin nodes
-    std::vector<Neuron *> fan_in_;
+    vector<Neuron *> fan_in_;
     // pointers to fanin weights
-    std::vector<float *> fan_in_weights_;
+    vector<float *> fan_in_weights_;
     // Sigmoid function lookup table used for fast computation
     // of sigmoid function
     static const float kSigmoidTable[];

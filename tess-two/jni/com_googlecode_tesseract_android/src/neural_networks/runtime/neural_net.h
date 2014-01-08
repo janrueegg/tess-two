@@ -24,7 +24,7 @@ class NeuralNet {
     NeuralNet();
     virtual ~NeuralNet();
     // create a net object from a file. Uses stdio
-    static NeuralNet *FromFile(const std::string file_name);
+    static NeuralNet *FromFile(const string file_name);
     // create a net object from an input buffer
     static NeuralNet *FromInputBuffer(InputFileBuffer *ib);
     // Different flavors of feed forward function
@@ -80,20 +80,20 @@ class NeuralNet {
     // count of allocated wgts in the last chunk
     int alloc_wgt_cnt_;
     // vector of weights buffers
-    std::vector<std::vector<float> *>wts_vec_;
+    vector<vector<float> *>wts_vec_;
     // Is the net an auto-encoder type
     bool auto_encoder_;
     // vector of input max values
-    std::vector<float> inputs_max_;
+    vector<float> inputs_max_;
     // vector of input min values
-    std::vector<float> inputs_min_;
+    vector<float> inputs_min_;
     // vector of input mean values
-    std::vector<float> inputs_mean_;
+    vector<float> inputs_mean_;
     // vector of input standard deviation values
-    std::vector<float> inputs_std_dev_;
+    vector<float> inputs_std_dev_;
     // vector of input offsets used by fast read-only
     // feedforward function
-    std::vector<Node> fast_nodes_;
+    vector<Node> fast_nodes_;
     // Network Initialization function
     void Init();
     // Clears all neurons
