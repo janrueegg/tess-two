@@ -30,30 +30,8 @@
 #cmakedefine HAVE_SYS_TYPES_H
 #cmakedefine HAVE_UNISTD_H
 
-/* Name of package */
-#define PACKAGE "leptonica"
-
-/* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "foo@bar.com"
-
-/* Define to the full name of this package. */
-#define PACKAGE_NAME "leptonica"
-
-/* Define to the full name and version of this package. */
-#define PACKAGE_STRING "leptonica 1.69"
-
-/* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "leptonica"
-
-/* Define to the home page for this package. */
-#define PACKAGE_URL ""
-
-/* Define to the version of this package. */
-#define PACKAGE_VERSION "1.69"
 
 #define STDC_HEADERS
-
-#define VERSION "1.69"
 
 /* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
    significant byte first (like Motorola and SPARC, unlike Intel). */

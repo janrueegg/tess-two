@@ -26,12 +26,9 @@ set(SOURCES adaptmap.c affine.c affinecompose.c arithlow.c arrayaccess.c
 			warper.c watershed.c webpio.c webpiostub.c writefile.c zlibmem.c zlibmemstub.c)
 
 set(HEADERS allheaders.h alltypes.h array.h arrayaccess.h bbuffer.h bmf.h bmp.h
-			ccbord.h dewarp.h environ.h gplot.h heap.h imageio.h
+			ccbord.h dewarp.h endianness.h environ.h gplot.h heap.h imageio.h
 			jbclass.h leptwin.h list.h morph.h pix.h ptra.h queue.h readbarcode.h
 			regutils.h stack.h sudoku.h watershed.h)
 
 add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 add_library(lept STATIC ${SOURCES} ${HEADERS})
-
-install(TARGETS lept ARCHIVE DESTINATION ${CMAKE_BINARY_DIR}/install/lib)
-install(FILES ${HEADERS} DESTINATION ${CMAKE_BINARY_DIR}/install/include/leptonica)

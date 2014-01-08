@@ -24,7 +24,7 @@
  -  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *====================================================================*/
 
-#if defined(_WIN32) && !defined(WINAPI_FAMILY)
+#ifdef _WIN32
 #ifndef  LEPTONICA_LEPTWIN_H
 #define  LEPTONICA_LEPTWIN_H
 

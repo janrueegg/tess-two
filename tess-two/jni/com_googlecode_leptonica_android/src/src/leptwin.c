@@ -35,7 +35,7 @@
  *      HBITMAP    pixGetWindowsHBITMAP(PIX *pix)
  */
 
-#if defined(_WIN32) && !defined(WINAPI_FAMILY)
+#ifdef _WIN32
 #include <stdlib.h>
 #include <string.h>
 #include "allheaders.h"
