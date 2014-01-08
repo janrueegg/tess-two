@@ -31,5 +31,4 @@ target_link_libraries(tesseract ${CMAKE_BINARY_DIR}/ccmain/ccmain.lib
 								${CMAKE_BINARY_DIR}/textord/textord.lib
 								${CMAKE_BINARY_DIR}/viewer/viewer.lib
 								${CMAKE_BINARY_DIR}/wordrec/wordrec.lib
-								${CMAKE_BINARY_DIR}/vs2008/port/vcport.lib
 								${LEPTONICA_ROOT}/lib/lept.lib)
