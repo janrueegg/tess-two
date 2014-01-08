@@ -63,23 +63,23 @@ class HybridNeuralNetCharClassifier : public CharClassifier {
 
  private:
   // Neural Net object used for classification
-  std::vector<tesseract::NeuralNet *> nets_;
-  std::vector<float> net_wgts_;
+  vector<tesseract::NeuralNet *> nets_;
+  vector<float> net_wgts_;
 
   // data buffers used to hold Neural Net inputs and outputs
   float *net_input_;
   float *net_output_;
 
   // Init the classifier provided a data-path and a language string
-  virtual bool Init(const std::string &data_file_path, const std::string &lang,
+  virtual bool Init(const string &data_file_path, const string &lang,
                     LangModel *lang_mod);
   // Loads the NeuralNets needed for the classifier
-  bool LoadNets(const std::string &data_file_path, const std::string &lang);
+  bool LoadNets(const string &data_file_path, const string &lang);
   // Load folding sets
   // This function returns true on success or if the file can't be read,
   // returns false if an error is encountered.
-  virtual bool LoadFoldingSets(const std::string &data_file_path,
-                               const std::string &lang,
+  virtual bool LoadFoldingSets(const string &data_file_path,
+                               const string &lang,
                                LangModel *lang_mod);
   // Folds the output of the NeuralNet using the loaded folding sets
   virtual void Fold();

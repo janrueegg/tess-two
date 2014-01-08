@@ -58,8 +58,8 @@ CharSamp::~CharSamp() {
 }
 
 // returns a UTF-8 version of the string label
-std::string CharSamp::stringLabel() const {
-  std::string str = "";
+string CharSamp::stringLabel() const {
+  string str = "";
   if (label32_ != NULL) {
     string_32 str32(label32_);
     CubeUtils::UTF32ToUTF8(str32.c_str(), &str);
@@ -68,7 +68,7 @@ std::string CharSamp::stringLabel() const {
 }
 
 // set a the string label using a UTF encoded string
-void CharSamp::SetLabel(std::string str) {
+void CharSamp::SetLabel(string str) {
   if (label32_ != NULL) {
     delete []label32_;
     label32_ = NULL;

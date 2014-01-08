@@ -27,7 +27,6 @@
 
 #include <string>
 #include <vector>
-#include <locale>
 
 #include "char_samp.h"
 #include "cube_utils.h"
@@ -58,8 +57,8 @@ const int TessLangModel::num_max_repeat_[kStateCnt] = {3, 32, 8, 3};
 // thresholds and penalties
 int TessLangModel::max_ood_shape_cost_ = CubeUtils::Prob2Cost(1e-4);
 
-TessLangModel::TessLangModel(const std::string &lm_params,
-                             const std::string &data_file_path,
+TessLangModel::TessLangModel(const string &lm_params,
+                             const string &data_file_path,
                              bool load_system_dawg,
                              TessdataManager *tessdata_manager,
                              CubeRecoContext *cntxt) {
@@ -153,15 +152,15 @@ bool TessLangModel::IsValidSequence(const char_32 *sequence, bool eow_flag,
 }
 
 bool TessLangModel::IsLeadingPunc(const char_32 ch) {
-  return lead_punc_.find(ch) != std::string::npos;
+  return lead_punc_.find(ch) != string::npos;
 }
 
 bool TessLangModel::IsTrailingPunc(const char_32 ch) {
-  return trail_punc_.find(ch) != std::string::npos;
+  return trail_punc_.find(ch) != string::npos;
 }
 
 bool TessLangModel::IsDigit(const char_32 ch) {
-  return digits_.find(ch) != std::string::npos;
+  return digits_.find(ch) != string::npos;
 }
 
 // The general fan-out generation function. Returns the list of edges
@@ -352,7 +351,6 @@ int TessLangModel::FanOut(CharAltList *alt_list, const Dawg *dawg,
           SetEdgeMask(edge_mask);
     }
 
-	std::locale loc;
     // if we are at the root, create upper case forms of these edges if possible
     if (root_flag == true) {
       for (int child = 0; child < child_edge_cnt; child++) {
@@ -361,10 +359,10 @@ int TessLangModel::FanOut(CharAltList *alt_list, const Dawg *dawg,
 
         if (has_case_ == true) {
           const char_32 *edge_str = child_edge->EdgeString();
-          if (edge_str != NULL && std::islower(edge_str[0], loc) != 0 &&
+          if (edge_str != NULL && std::islower(edge_str[0]) != 0 &&
               edge_str[1] == 0) {
             int class_id =
-                cntxt_->CharacterSet()->ClassID(std::toupper(edge_str[0], loc));
+                cntxt_->CharacterSet()->ClassID(std::toupper(edge_str[0]));
             if (class_id != INVALID_UNICHAR_ID) {
               // generate an upper case edge for lower case chars
               edge_array[edge_cnt] = new TessLangModEdge(cntxt_, dawg,
@@ -434,13 +432,13 @@ int TessLangModel::NumberEdges(EDGE_REF edge_ref, LangModEdge **edge_array) {
 }
 
 // Loads Language model elements from contents of the <lang>.cube.lm file
-bool TessLangModel::LoadLangModelElements(const std::string &lm_params) {
+bool TessLangModel::LoadLangModelElements(const string &lm_params) {
   bool success = true;
   // split into lines, each corresponding to a token type below
-  std::vector<std::string> str_vec;
+  vector<string> str_vec;
   CubeUtils::SplitStringUsing(lm_params, "\r\n", &str_vec);
   for (int entry = 0; entry < str_vec.size(); entry++) {
-    std::vector<std::string> tokens;
+    vector<string> tokens;
     // should be only two tokens: type and value
     CubeUtils::SplitStringUsing(str_vec[entry], "=", &tokens);
     if (tokens.size() != 2)
@@ -481,7 +479,7 @@ bool TessLangModel::LoadLangModelElements(const std::string &lm_params) {
   return success;
 }
 
-void TessLangModel::RemoveInvalidCharacters(std::string *lm_str) {
+void TessLangModel::RemoveInvalidCharacters(string *lm_str) {
   CharSet *char_set = cntxt_->CharacterSet();
   tesseract::string_32 lm_str32;
   CubeUtils::UTF8ToUTF32(lm_str->c_str(), &lm_str32);

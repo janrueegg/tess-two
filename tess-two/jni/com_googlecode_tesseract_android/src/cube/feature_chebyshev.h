@@ -47,7 +47,7 @@ class FeatureChebyshev : public FeatureBase {
  protected:
   static const int kChebychevCoefficientCnt = 40;
   // Compute Chebychev coefficients for the specified vector
-  void ChebyshevCoefficients(const std::vector<float> &input,
+  void ChebyshevCoefficients(const vector<float> &input,
                              int coeff_cnt, float *coeff);
   // Compute the features for a given CharSamp
   bool ComputeChebyshevCoefficients(CharSamp *samp, float *features);

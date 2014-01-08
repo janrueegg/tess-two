@@ -54,7 +54,7 @@ class CubeRecoContext {
   ~CubeRecoContext();
 
   // accessor functions
-  inline const std::string & Lang() const { return lang_; }
+  inline const string & Lang() const { return lang_; }
   inline CharSet *CharacterSet() const { return char_set_; }
   const UNICHARSET *TessUnicharset() const { return tess_unicharset_; }
   inline CharClassifier *Classifier() const { return char_classifier_; }
@@ -123,7 +123,7 @@ class CubeRecoContext {
   }
 
   // Returns the path of the data files
-  bool GetDataFilePath(std::string *path) const;
+  bool GetDataFilePath(string *path) const;
   // Creates a CubeRecoContext object using a tesseract object. Data
   // files are loaded via the tessdata_manager, and the tesseract
   // unicharset is provided in order to map Cube's unicharset to
@@ -134,7 +134,7 @@ class CubeRecoContext {
 
  private:
   bool loaded_;
-  std::string lang_;
+  string lang_;
   CharSet *char_set_;
   UNICHARSET *tess_unicharset_;
   WordSizeModel *word_size_model_;

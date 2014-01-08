@@ -60,7 +60,7 @@ class CharSamp : public Bmp8 {
     return label32_[0];
   }
   char_32 * StrLabel() const { return label32_; }
-  std::string stringLabel() const;
+  string stringLabel() const;
 
   void SetLeft(unsigned short left) { left_ = left; }
   void SetTop(unsigned short top) { top_ = top; }
@@ -93,7 +93,7 @@ class CharSamp : public Bmp8 {
       }
     }
   }
-  void SetLabel(std::string str);
+  void SetLabel(string str);
   void SetNormTop(unsigned short norm_top) { norm_top_ = norm_top; }
   void SetNormBottom(unsigned short norm_bottom) {
     norm_bottom_ = norm_bottom;

@@ -32,8 +32,8 @@ class CharClassifierFactory {
  public:
   // Creates a CharClassifier object of the appropriate type depending on the
   // classifier type in the settings file
-  static CharClassifier *Create(const std::string &data_file_path,
-                                const std::string &lang,
+  static CharClassifier *Create(const string &data_file_path,
+                                const string &lang,
                                 LangModel *lang_mod,
                                 CharSet *char_set,
                                 TuningParams *params);

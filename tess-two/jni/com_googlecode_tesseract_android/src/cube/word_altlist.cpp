@@ -108,7 +108,7 @@ void WordAltList::Sort() {
 void WordAltList::PrintDebug() {
   for (int alt_idx = 0; alt_idx < alt_cnt_; alt_idx++) {
     char_32 *word_32 = word_alt_[alt_idx];
-    std::string word_str;
+    string word_str;
     CubeUtils::UTF32ToUTF8(word_32, &word_str);
     int num_unichars = CubeUtils::StrLen(word_32);
     fprintf(stderr, "Alt[%d]=%s (cost=%d, num_unichars=%d); unichars=", alt_idx,

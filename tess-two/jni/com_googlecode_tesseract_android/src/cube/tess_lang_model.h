@@ -37,8 +37,8 @@ const int kNumLiteralCnt = 5;
 
 class TessLangModel : public LangModel {
  public:
-  TessLangModel(const std::string &lm_params,
-                const std::string &data_file_path,
+  TessLangModel(const string &lm_params,
+                const string &data_file_path,
                 bool load_system_dawg,
                 TessdataManager *tessdata_manager,
                 CubeRecoContext *cntxt);
@@ -70,7 +70,7 @@ class TessLangModel : public LangModel {
   bool IsTrailingPunc(char_32 ch);
   bool IsDigit(char_32 ch);
 
-  void RemoveInvalidCharacters(std::string *lm_str);
+  void RemoveInvalidCharacters(string *lm_str);
  private:
   // static LM state machines
   static const Dawg *ood_dawg_;
@@ -88,17 +88,17 @@ class TessLangModel : public LangModel {
 
   // remaining language model elements needed by cube. These get loaded from
   // the .lm file
-  std::string lead_punc_;
-  std::string trail_punc_;
-  std::string num_lead_punc_;
-  std::string num_trail_punc_;
-  std::string operators_;
-  std::string digits_;
-  std::string alphas_;
+  string lead_punc_;
+  string trail_punc_;
+  string num_lead_punc_;
+  string num_trail_punc_;
+  string operators_;
+  string digits_;
+  string alphas_;
   // String of characters in RHS of each line of <lang>.cube.lm
   // Each element is hard-coded to correspond to a specific token type
   // (see LoadLangModelElements)
-  std::string *literal_str_[kNumLiteralCnt];
+  string *literal_str_[kNumLiteralCnt];
   // Recognition context needed to access language properties
   // (case, cursive,..)
   CubeRecoContext *cntxt_;
@@ -128,7 +128,7 @@ class TessLangModel : public LangModel {
                        bool eow_flag, LangModEdge **final_edge);
   // Parse language model elements from the given string, which should
   // have been loaded from <lang>.cube.lm file, e.g. in CubeRecoContext
-  bool LoadLangModelElements(const std::string &lm_params);
+  bool LoadLangModelElements(const string &lm_params);
 
   // Returns the number of word Dawgs in the language model.
   int NumDawgs() const;

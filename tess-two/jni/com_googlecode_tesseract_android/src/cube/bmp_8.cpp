@@ -494,7 +494,7 @@ bool Bmp8::ScaleFrom(Bmp8 *bmp, bool isotropic) {
               dest_line_buff[ydest][xdest] / dest_pix_cnt[ydest][xdest];
 
           line_buff_[ydest][xdest] =
-              (unsigned char) std::min((unsigned int)255, pixval);
+              (unsigned char) min((unsigned int)255, pixval);
         }
       }
     }
@@ -582,8 +582,8 @@ bool Bmp8::SaveBmp2CharDumpFile(FILE *fp) const {
 // copy part of the specified bitmap to the top of the bitmap
 // does any necessary clipping
 void Bmp8::Copy(int x_st, int y_st, int wid, int hgt, Bmp8 *bmp_dest) const {
-  int x_end = std::min(x_st + wid, static_cast<int>(wid_)),
-  y_end = std::min(y_st + hgt, static_cast<int>(hgt_));
+  int x_end = min(x_st + wid, static_cast<int>(wid_)),
+  y_end = min(y_st + hgt, static_cast<int>(hgt_));
 
   for (int y = y_st; y < y_end; y++) {
     for (int x = x_st; x < x_end; x++) {
@@ -790,7 +790,7 @@ bool Bmp8::ComputeTanTable() {
 
   for (ang_idx = 0, ang_val = kMinDeslantAngle;
        ang_idx < kDeslantAngleCount; ang_idx++) {
-    tan_table_[ang_idx] = std::tan(ang_val * M_PI / 180.0f);
+    tan_table_[ang_idx] = tan(ang_val * M_PI / 180.0f);
     ang_val += kDeslantAngleDelta;
   }
 
@@ -867,7 +867,7 @@ bool Bmp8::Deslant() {
     for (x = min_des_x; x <= max_des_x; x++) {
       if (angle_hist[ang_idx][x - min_des_x] > 0) {
         norm_val = (1.0f * angle_hist[ang_idx][x - min_des_x] / hgt_);
-        entropy += (-1.0f * norm_val * std::log(norm_val));
+        entropy += (-1.0f * norm_val * log(norm_val));
       }
     }
 
@@ -1006,9 +1006,9 @@ bool Bmp8::HorizontalDeslant(double *deslant_angle) {
   }
 
   // compute min and max values for x after deslant
-  min_des_y = std::min(0, static_cast<int>((wid_ - 1) * tan_table_[0]));
+  min_des_y = min(0, static_cast<int>((wid_ - 1) * tan_table_[0]));
   max_des_y = (hgt_ - 1) +
-      std::max(0, static_cast<int>((wid_ - 1) * tan_table_[kDeslantAngleCount - 1]));
+      max(0, static_cast<int>((wid_ - 1) * tan_table_[kDeslantAngleCount - 1]));
 
   des_hgt = max_des_y - min_des_y + 1;
 
@@ -1073,9 +1073,9 @@ bool Bmp8::HorizontalDeslant(double *deslant_angle) {
     int old_hgt = hgt_;
 
     // create a new buffer
-    min_des_y = std::min(0, static_cast<int>((wid_ - 1) * -tan_table_[best_ang]));
+    min_des_y = min(0, static_cast<int>((wid_ - 1) * -tan_table_[best_ang]));
     max_des_y = (hgt_ - 1) +
-        std::max(0, static_cast<int>((wid_ - 1) * -tan_table_[best_ang]));
+        max(0, static_cast<int>((wid_ - 1) * -tan_table_[best_ang]));
     hgt_ = max_des_y - min_des_y + 1;
     dest_lines = CreateBmpBuffer();
     if (dest_lines == NULL) {

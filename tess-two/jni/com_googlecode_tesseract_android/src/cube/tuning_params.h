@@ -25,9 +25,9 @@
 #define TUNING_PARAMS_H
 
 #include <string>
-//#ifdef USE_STD_NAMESPACE
-//using std::string;
-//#endif
+#ifdef USE_STD_NAMESPACE
+using std::string;
+#endif
 
 namespace tesseract {
 class TuningParams {
@@ -79,8 +79,8 @@ class TuningParams {
     hist_wind_wid_ = hist_wind_wid;
   }
 
-  virtual bool Save(std::string file_name) = 0;
-  virtual bool Load(std::string file_name) = 0;
+  virtual bool Save(string file_name) = 0;
+  virtual bool Load(string file_name) = 0;
 
  protected:
   // weight of recognition cost. This includes the language model cost

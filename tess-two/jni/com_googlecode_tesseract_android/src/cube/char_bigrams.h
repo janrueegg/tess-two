@@ -58,8 +58,8 @@ class CharBigrams {
   CharBigrams();
   ~CharBigrams();
   // Construct the CharBigrams class from a file
-  static CharBigrams *Create(const std::string &data_file_path,
-                             const std::string &lang);
+  static CharBigrams *Create(const string &data_file_path,
+                             const string &lang);
   // Top-level function to return the mean character bigram cost of a
   // sequence of characters.  If char_set is not NULL, use
   // tesseract functions to return a case-invariant cost.

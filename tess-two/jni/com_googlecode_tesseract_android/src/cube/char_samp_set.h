@@ -46,12 +46,12 @@ class CharSampSet {
   // returns samples buffer
   CharSamp ** Samples() const { return samp_buff_; }
   // Create a CharSampSet set object from a file
-  static CharSampSet *FromCharDumpFile(std::string file_name);
+  static CharSampSet *FromCharDumpFile(string file_name);
   // Enumerate the Samples in the set one-by-one calling the enumertor's
   // EnumCharSamp method for each sample
-  static bool EnumSamples(std::string file_name, CharSampEnum *enumerator);
+  static bool EnumSamples(string file_name, CharSampEnum *enumerator);
   // Create a new Char Dump file
-  static FILE *CreateCharDumpFile(std::string file_name);
+  static FILE *CreateCharDumpFile(string file_name);
   // Add a new sample to the set
   bool Add(CharSamp *char_samp);
 

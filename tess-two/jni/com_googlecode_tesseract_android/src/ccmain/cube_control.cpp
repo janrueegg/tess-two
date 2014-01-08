@@ -385,7 +385,7 @@ bool Tesseract::cube_recognize(CubeObject *cube_obj, BLOCK* block,
   char_32 *cube_best_32 = cube_alt_list->Alt(0);
   double cube_prob = CubeUtils::Cost2Prob(cube_alt_list->AltCost(0));
   float cube_certainty = convert_prob_to_tess_certainty(cube_prob);
-  std::string cube_best_str;
+  string cube_best_str;
   CubeUtils::UTF32ToUTF8(cube_best_32, &cube_best_str);
 
   // Retrieve Cube's character bounding boxes and CharSamples,

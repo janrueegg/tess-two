@@ -60,13 +60,13 @@ class CubeUtils {
   // Creates a Pix from a CharSamp
   static Pix *PixFromCharSample(CharSamp *char_samp);
   // read the contents of a file to a string
-  static bool ReadFileToString(const std::string &file_name, std::string *str);
+  static bool ReadFileToString(const string &file_name, string *str);
   // split a string into vectors using any of the specified delimiters
-  static void SplitStringUsing(const std::string &str, const std::string &delims,
-                               std::vector<std::string> *str_vec);
+  static void SplitStringUsing(const string &str, const string &delims,
+                               vector<string> *str_vec);
   // UTF-8 to UTF-32 convesion functions
   static void UTF8ToUTF32(const char *utf8_str, string_32 *str32);
-  static void UTF32ToUTF8(const char_32 *utf32_str, std::string *str);
+  static void UTF32ToUTF8(const char_32 *utf32_str, string *str);
   // Returns true if input word has either 1) all-one-case, or 2)
   // first character upper-case, and remaining characters lower-case.
   // If char_set is not NULL, uses tesseract's unicharset functions

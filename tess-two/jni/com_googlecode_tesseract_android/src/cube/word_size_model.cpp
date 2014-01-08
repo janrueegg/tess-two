@@ -38,8 +38,8 @@ WordSizeModel::~WordSizeModel() {
   }
 }
 
-WordSizeModel *WordSizeModel::Create(const std::string &data_file_path,
-                                     const std::string &lang,
+WordSizeModel *WordSizeModel::Create(const string &data_file_path,
+                                     const string &lang,
                                      CharSet *char_set,
                                      bool contextual) {
   WordSizeModel *obj = new WordSizeModel(char_set, contextual);
@@ -56,20 +56,20 @@ WordSizeModel *WordSizeModel::Create(const std::string &data_file_path,
   return obj;
 }
 
-bool WordSizeModel::Init(const std::string &data_file_path, const std::string &lang) {
-  std::string stats_file_name;
+bool WordSizeModel::Init(const string &data_file_path, const string &lang) {
+  string stats_file_name;
   stats_file_name = data_file_path + lang;
   stats_file_name += ".cube.size";
 
   // read file to memory
-  std::string str_data;
+  string str_data;
 
   if (!CubeUtils::ReadFileToString(stats_file_name, &str_data)) {
     return false;
   }
 
   // split to words
-  std::vector<std::string> tokens;
+  vector<string> tokens;
   CubeUtils::SplitStringUsing(str_data, "\t\r\n", &tokens);
   if (tokens.size() < 1) {
     fprintf(stderr, "Cube ERROR (WordSizeModel::Init): invalid "
@@ -88,7 +88,7 @@ bool WordSizeModel::Init(const std::string &data_file_path, const std::string &l
   // multiplied by the position count (4: start, middle, final, isolated)
   int size_class_cnt = contextual_ ?
       (char_set_->ClassCount() * 4) : char_set_->ClassCount();
-  std::string fnt_name = "";
+  string fnt_name = "";
 
   for (int tok = 0; tok < tokens.size(); tok += token_cnt) {
     // a new font, write the old font data and re-init
@@ -119,9 +119,9 @@ bool WordSizeModel::Init(const std::string &data_file_path, const std::string &l
       }
 
       // strip out path and extension
-      std::string stripped_font_name = tokens[tok].substr(0, tokens[tok].find('.'));
-      std::string::size_type strt_pos = stripped_font_name.find_last_of("/\\");
-      if (strt_pos != std::string::npos) {
+      string stripped_font_name = tokens[tok].substr(0, tokens[tok].find('.'));
+      string::size_type strt_pos = stripped_font_name.find_last_of("/\\");
+      if (strt_pos != string::npos) {
         fnt_info.font_name = stripped_font_name.substr(strt_pos);
       } else {
         fnt_info.font_name = stripped_font_name;

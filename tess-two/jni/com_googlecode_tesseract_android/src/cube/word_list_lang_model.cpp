@@ -121,7 +121,7 @@ void WordListLangModel::WordVariants(const CharSet &char_set,
                                      string_32 prefix_str32,
                                      WERD_CHOICE *word_so_far,
                                      string_32 str32,
-                                     std::vector<WERD_CHOICE *> *word_variants) {
+                                     vector<WERD_CHOICE *> *word_variants) {
   int str_len = str32.length();
   if (str_len == 0) {
     if (word_so_far->length() > 0) {
@@ -153,7 +153,7 @@ void WordListLangModel::WordVariants(const CharSet &char_set,
 // than one spelling in terms of the class-ids
 void WordListLangModel::WordVariants(const CharSet &char_set,
                                      const UNICHARSET *uchset, string_32 str32,
-                                     std::vector<WERD_CHOICE *> *word_variants) {
+                                     vector<WERD_CHOICE *> *word_variants) {
   for (int i = 0; i < word_variants->size(); i++) {
     delete (*word_variants)[i];
   }
@@ -183,7 +183,7 @@ bool WordListLangModel::AddString32(const char_32 *char_32_ptr) {
     return false;
   }
   // get all the word variants
-  std::vector<WERD_CHOICE *> word_variants;
+  vector<WERD_CHOICE *> word_variants;
   WordVariants(*(cntxt_->CharacterSet()), cntxt_->TessUnicharset(),
                char_32_ptr, &word_variants);
 

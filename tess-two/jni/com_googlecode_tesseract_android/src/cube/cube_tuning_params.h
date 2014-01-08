@@ -42,11 +42,11 @@ class CubeTuningParams : public TuningParams {
 
   // Create an object given the data file path and the language by loading
   // the approporiate file
-  static CubeTuningParams * Create(const std::string &data_file,
-                                   const std::string &lang);
+  static CubeTuningParams * Create(const string &data_file,
+                                   const string &lang);
   // Save and load the tuning parameters to a specified file
-  bool Save(std::string file_name);
-  bool Load(std::string file_name);
+  bool Save(string file_name);
+  bool Load(string file_name);
 
  private:
   double ood_wgt_;

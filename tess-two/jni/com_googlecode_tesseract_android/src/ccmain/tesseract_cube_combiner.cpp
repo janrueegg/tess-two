@@ -51,9 +51,9 @@ TesseractCubeCombiner::~TesseractCubeCombiner() {
 bool TesseractCubeCombiner::LoadCombinerNet() {
   ASSERT_HOST(cube_cntxt_);
   // Compute the path of the combiner net
-  std::string data_path;
+  string data_path;
   cube_cntxt_->GetDataFilePath(&data_path);
-  std::string net_file_name =  data_path + cube_cntxt_->Lang() +
+  string net_file_name =  data_path + cube_cntxt_->Lang() +
                           ".tesseract_cube.nn";
 
   // Return false if file does not exist
@@ -80,7 +80,7 @@ bool TesseractCubeCombiner::LoadCombinerNet() {
 
 // Normalize a UTF-8 string. Converts the UTF-8 string to UTF32 and optionally
 // strips punc and/or normalizes case and then converts back
-std::string TesseractCubeCombiner::NormalizeString(const std::string &str,
+string TesseractCubeCombiner::NormalizeString(const string &str,
                                               bool remove_punc,
                                               bool norm_case) {
   // convert to UTF32
@@ -100,26 +100,26 @@ std::string TesseractCubeCombiner::NormalizeString(const std::string &str,
     }
   }
   // convert back to UTF8
-  std::string new_str;
+  string new_str;
   CubeUtils::UTF32ToUTF8(new_str32.c_str(), &new_str);
   return new_str;
 }
 
 // Compares 2 strings optionally ignoring punctuation
-int TesseractCubeCombiner::CompareStrings(const std::string &str1,
-                                          const std::string &str2,
+int TesseractCubeCombiner::CompareStrings(const string &str1,
+                                          const string &str2,
                                           bool ignore_punc,
                                           bool ignore_case) {
   if (!ignore_punc && !ignore_case) {
     return str1.compare(str2);
   }
-  std::string norm_str1 = NormalizeString(str1, ignore_punc, ignore_case);
-  std::string norm_str2 = NormalizeString(str2, ignore_punc, ignore_case);
+  string norm_str1 = NormalizeString(str1, ignore_punc, ignore_case);
+  string norm_str2 = NormalizeString(str2, ignore_punc, ignore_case);
   return norm_str1.compare(norm_str2);
 }
 
 // Check if a string is a valid Tess dict word or not
-bool TesseractCubeCombiner::ValidWord(const std::string &str) {
+bool TesseractCubeCombiner::ValidWord(const string &str) {
   return (cube_cntxt_->TesseractObject()->getDict().valid_word(str.c_str())
           > 0);
 }
@@ -127,11 +127,11 @@ bool TesseractCubeCombiner::ValidWord(const std::string &str) {
 // Public method for computing the combiner features. The agreement
 // output parameter will be true if both answers are identical,
 // and false otherwise.
-bool TesseractCubeCombiner::ComputeCombinerFeatures(const std::string &tess_str,
+bool TesseractCubeCombiner::ComputeCombinerFeatures(const string &tess_str,
                                                     int tess_confidence,
                                                     CubeObject *cube_obj,
                                                     WordAltList *cube_alt_list,
-                                                    std::vector<double> *features,
+                                                    vector<double> *features,
                                                     bool *agreement) {
   features->clear();
   *agreement = false;
@@ -142,7 +142,7 @@ bool TesseractCubeCombiner::ComputeCombinerFeatures(const std::string &tess_str,
   char_32 *cube_best_str32 = cube_alt_list->Alt(0);
   if (cube_best_str32 == NULL || CubeUtils::StrLen(cube_best_str32) < 1)
     return false;
-  std::string cube_best_str;
+  string cube_best_str;
   int cube_best_cost = cube_alt_list->AltCost(0);
   int cube_best_bigram_cost = 0;
   bool cube_best_bigram_cost_valid = true;
@@ -162,7 +162,7 @@ bool TesseractCubeCombiner::ComputeCombinerFeatures(const std::string &tess_str,
 
   // Get Cube's second best string; if empty, return false
   char_32 *cube_next_best_str32;
-  std::string cube_next_best_str;
+  string cube_next_best_str;
   int cube_next_best_cost = WORST_COST;
   if (cube_alt_list->AltCount() > 1) {
     cube_next_best_str32 = cube_alt_list->Alt(1);
@@ -176,7 +176,7 @@ bool TesseractCubeCombiner::ComputeCombinerFeatures(const std::string &tess_str,
   // Rank of Tesseract's top result in Cube's alternate list
   int tess_rank = 0;
   for (tess_rank = 0; tess_rank < cube_alt_list->AltCount(); tess_rank++) {
-    std::string alt_str;
+    string alt_str;
     CubeUtils::UTF32ToUTF8(cube_alt_list->Alt(tess_rank), &alt_str);
     if (alt_str == tess_str)
       break;
@@ -281,14 +281,14 @@ float TesseractCubeCombiner::CombineResults(WERD_RES *tess_res,
 
   // Tesseract result string, tesseract confidence, and cost of
   // tesseract result according to cube
-  std::string tess_str = tess_res->best_choice->unichar_string().string();
+  string tess_str = tess_res->best_choice->unichar_string().string();
   // Map certainty [-20.0, 0.0] to confidence [0, 100]
   int tess_confidence = MIN(100, MAX(1, static_cast<int>(
       100 + (5 * tess_res->best_choice->certainty()))));
 
   // Compute the combiner features. If feature computation fails or
   // answers are identical, tesseract wins with probability 1.0
-  std::vector<double> features;
+  vector<double> features;
   bool agreement;
   bool combiner_success = ComputeCombinerFeatures(tess_str, tess_confidence,
                                                   cube_obj, cube_alt_list,

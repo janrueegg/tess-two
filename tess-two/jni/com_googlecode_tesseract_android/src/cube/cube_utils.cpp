@@ -20,7 +20,6 @@
 #include <math.h>
 #include <string>
 #include <vector>
-#include <locale>
 #include "cube_utils.h"
 #include "char_set.h"
 #include "unichar.h"
@@ -266,7 +265,7 @@ unsigned char *CubeUtils::GetImageData(Pix *pix, int left, int top,
 }
 
 // read file contents to a string
-bool CubeUtils::ReadFileToString(const std::string &file_name, std::string *str) {
+bool CubeUtils::ReadFileToString(const string &file_name, string *str) {
   str->clear();
   FILE *fp = fopen(file_name.c_str(), "rb");
   if (fp == NULL) {
@@ -299,9 +298,9 @@ bool CubeUtils::ReadFileToString(const std::string &file_name, std::string *str)
 }
 
 // splits a string into vectors based on specified delimiters
-void CubeUtils::SplitStringUsing(const std::string &str,
-                                 const std::string &delims,
-                                 std::vector<std::string> *str_vec) {
+void CubeUtils::SplitStringUsing(const string &str,
+                                 const string &delims,
+                                 vector<string> *str_vec) {
   // Optimize the common case where delims is a single character.
   if (delims[0] != '\0' && delims[1] == '\0') {
     char c = delims[0];
@@ -313,17 +312,17 @@ void CubeUtils::SplitStringUsing(const std::string &str,
       } else {
         const char* start = p;
         while (++p != end && *p != c);
-        str_vec->push_back(std::string(start, p - start));
+        str_vec->push_back(string(start, p - start));
       }
     }
     return;
   }
 
-  std::string::size_type begin_index, end_index;
+  string::size_type begin_index, end_index;
   begin_index = str.find_first_not_of(delims);
-  while (begin_index != std::string::npos) {
+  while (begin_index != string::npos) {
     end_index = str.find_first_of(delims, begin_index);
-    if (end_index == std::string::npos) {
+    if (end_index == string::npos) {
       str_vec->push_back(str.substr(begin_index));
       return;
     }
@@ -347,7 +346,7 @@ void CubeUtils::UTF8ToUTF32(const char *utf8_str, string_32 *str32) {
 }
 
 // UTF-8 to UTF-32 convesion functions
-void CubeUtils::UTF32ToUTF8(const char_32 *utf32_str, std::string *str) {
+void CubeUtils::UTF32ToUTF8(const char_32 *utf32_str, string *str) {
   str->clear();
   for (const char_32 *ch_32 = utf32_str; (*ch_32) != 0; ch_32++)  {
     UNICHAR uni_ch((*ch_32));
@@ -369,20 +368,19 @@ bool CubeUtils::IsCaseInvariant(const char_32 *str32, CharSet *char_set) {
   bool cur_upper;
   bool cur_lower;
 
-  std::string str8;
+  string str8;
   if (!char_set) {
     // If cube char_set is missing, use C-locale-dependent functions
     // on UTF8 characters to determine case properties.
-	std::locale loc;
-    first_upper = std::isupper(str32[0], loc);
-    first_lower = std::islower(str32[0], loc);
+    first_upper = std::isupper(str32[0]);
+    first_lower = std::islower(str32[0]);
     if (first_upper)
       capitalized = true;
     prev_upper = first_upper;
-    prev_lower = std::islower(str32[0], loc);
+    prev_lower = std::islower(str32[0]);
     for (int c = 1; str32[c] != 0; ++c) {
-      cur_upper = std::isupper(str32[c], loc);
-      cur_lower = std::islower(str32[c], loc);
+      cur_upper = std::isupper(str32[c]);
+      cur_lower = std::islower(str32[c]);
       if ((prev_upper && cur_lower) || (prev_lower && cur_upper))
         all_one_case = false;
       if (cur_upper)

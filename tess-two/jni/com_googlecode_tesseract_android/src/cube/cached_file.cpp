@@ -24,7 +24,7 @@
 
 namespace tesseract {
 
-CachedFile::CachedFile(std::string file_name) {
+CachedFile::CachedFile(string file_name) {
   file_name_ = file_name;
   buff_ = NULL;
   buff_pos_ = 0;

@@ -25,14 +25,14 @@
 
 #include <stdio.h>
 #include <string>
-//#ifdef USE_STD_NAMESPACE
-//using std::string;
-//#endif
+#ifdef USE_STD_NAMESPACE
+using std::string;
+#endif
 
 namespace tesseract {
 class CachedFile {
  public:
-  explicit CachedFile(std::string file_name);
+  explicit CachedFile(string file_name);
   ~CachedFile();
 
   // reads a specified number of bytes to the specified buffer and
@@ -48,7 +48,7 @@ class CachedFile {
  private:
   static const unsigned int kCacheSize = 0x8000000;
   // file name
-  std::string file_name_;
+  string file_name_;
   // internal file buffer
   unsigned char *buff_;
   // file position

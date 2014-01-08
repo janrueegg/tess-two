@@ -52,10 +52,10 @@ WordUnigrams::~WordUnigrams() {
 
 // Load the word-list and unigrams from file and create an object
 // The word list is assumed to be sorted in lexicographic order.
-WordUnigrams *WordUnigrams::Create(const std::string &data_file_path,
-                                   const std::string &lang) {
-  std::string file_name;
-  std::string str;
+WordUnigrams *WordUnigrams::Create(const string &data_file_path,
+                                   const string &lang) {
+  string file_name;
+  string str;
 
   file_name = data_file_path + lang;
   file_name += ".cube.word-freq";
@@ -66,7 +66,7 @@ WordUnigrams *WordUnigrams::Create(const std::string &data_file_path,
   }
 
   // split into lines
-  std::vector<std::string> str_vec;
+  vector<string> str_vec;
   CubeUtils::SplitStringUsing(str, "\r\n \t", &str_vec);
   if (str_vec.size() < 2) {
     return NULL;
@@ -153,9 +153,9 @@ int WordUnigrams::Cost(const char_32 *key_str32,
   if (!key_str32)
     return 0;
   // convert string to UTF8 to split into space-separated words
-  std::string key_str;
+  string key_str;
   CubeUtils::UTF32ToUTF8(key_str32, &key_str);
-  std::vector<std::string> words;
+  vector<string> words;
   CubeUtils::SplitStringUsing(key_str, " \t", &words);
 
   // no words => no cost
@@ -172,7 +172,7 @@ int WordUnigrams::Cost(const char_32 *key_str32,
     int len = CubeUtils::StrLen(str32.c_str());
 
     // strip all trailing punctuation
-    std::string clean_str;
+    string clean_str;
     int clean_len = len;
     bool trunc = false;
     while (clean_len > 0 &&
@@ -197,7 +197,7 @@ int WordUnigrams::Cost(const char_32 *key_str32,
     }
     ASSERT_HOST(clean_str32 != NULL);
 
-    std::string str8;
+    string str8;
     CubeUtils::UTF32ToUTF8(clean_str32, &str8);
     int word_cost = CostInternal(str8.c_str());
 
@@ -207,14 +207,14 @@ int WordUnigrams::Cost(const char_32 *key_str32,
         CubeUtils::IsCaseInvariant(clean_str32, char_set)) {
       char_32 *lower_32 = CubeUtils::ToLower(clean_str32, char_set);
       if (lower_32) {
-        std::string lower_8;
+        string lower_8;
         CubeUtils::UTF32ToUTF8(lower_32, &lower_8);
         word_cost = MIN(word_cost, CostInternal(lower_8.c_str()));
         delete [] lower_32;
       }
       char_32 *upper_32 = CubeUtils::ToUpper(clean_str32, char_set);
       if (upper_32) {
-        std::string upper_8;
+        string upper_8;
         CubeUtils::UTF32ToUTF8(upper_32, &upper_8);
         word_cost = MIN(word_cost, CostInternal(upper_8.c_str()));
         delete [] upper_32;
