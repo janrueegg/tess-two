@@ -61,9 +61,9 @@ LOCAL_SRC_FILES += \
 LOCAL_C_INCLUDES += \
   $(LOCAL_PATH)
 
-LOCAL_LDLIBS += \
-  -ljnigraphics \
-  -llog
+#LOCAL_LDLIBS += \
+#  -ljnigraphics \
+#  -llog
 
 # common
 
@@ -71,4 +71,4 @@ LOCAL_PRELINK_MODULE := false
 LOCAL_SHARED_LIBRARIES := liblept
 LOCAL_DISABLE_FORMAT_STRING_CHECKS := true
 
-include $(BUILD_SHARED_LIBRARY)
+include $(BUILD_STATIC_LIBRARY)

@@ -20,8 +20,8 @@ LOCAL_SRC_FILES := \
 LOCAL_CFLAGS := \
   -DHAVE_CONFIG_H
 
-LOCAL_LDLIBS := \
-  -lz
+#LOCAL_LDLIBS := \
+#  -lz
 
 # missing stdio functions
 
@@ -49,12 +49,12 @@ LOCAL_C_INCLUDES += \
   $(LOCAL_PATH) \
   $(LEPTONICA_PATH)/src
 
-LOCAL_LDLIBS += \
-  -ljnigraphics \
-  -llog
+#LOCAL_LDLIBS += \
+#  -ljnigraphics \
+#  -llog
 
 # common
 
 LOCAL_PRELINK_MODULE:= false
 
-include $(BUILD_SHARED_LIBRARY)
+include $(BUILD_STATIC_LIBRARY)
